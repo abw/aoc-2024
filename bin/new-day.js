@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { fail } from '@abw/badger-utils'
+import { chmod } from 'node:fs/promises'
 import {
   appStatus, bin, brightWhite, yellow, cmdLineFlags, quit, confirm, green
 } from '@abw/badger'
@@ -61,12 +62,16 @@ async function nextDay() {
   }
 }
 
-async function createDayDir(dir, flags) {
-  console.log(`Creating ${dir}`)
-  await copyDir(root.dir('template'), dir, flags)
+async function createDayDir(dir, options) {
+  if (options.verbose) {
+    console.log(`Creating ${dir}`)
+  }
+  const day = dir.name().match(/\d+/)[0]
+  await copyDir(root.dir('template'), dir, { ...options, day })
+  console.log(green(`✓ created ${dir}`))
 }
 
-async function copyDir(src, dest, flags) {
+async function copyDir(src, dest, options) {
   await dest.mustExist({ create: true })
   const entries = await src.entries()
 
@@ -74,23 +79,32 @@ async function copyDir(src, dest, flags) {
     const file = await entry.isFile()
     if (file) {
       const destFile = dest.file(entry.base())
-      if (flags.verbose) {
-        console.log(green(`  ✓ ${destFile} `))
-      }
+      await copyFile(entry, destFile, options)
       continue
     }
     const dir = await entry.isDirectory()
     if (dir) {
       const destDir = dest.dir(entry.base())
-      if (flags.verbose) {
+      if (options.verbose) {
         console.log(yellow(`  → ${destDir}`))
       }
-      await copyDir(entry, destDir, flags)
+      await copyDir(entry, destDir, options)
       continue
     }
     fail(`Can only copy files and directories: ${entry}`)
   }
 }
+
+async function copyFile(src, dest, options) {
+  const text = await src.read()
+  const repl = text.replaceAll(/<day>/g, options.day)
+  await dest.write(repl)
+  await chmod(dest.path(), await src.mode())
+  if (options.verbose) {
+    console.log(green(`  ✓ ${dest} `))
+  }
+}
+
 
 function help() {
   const script   = 'bin/new-day.js'

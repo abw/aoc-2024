@@ -50,6 +50,18 @@ $ ./part1.js -d
 The `-h` (or `--help`) option shows help summarising the above options, in
 case you didn't read this fine manual.
 
+# New Day
+
+The `bin/new-day.js` script can be used to create a template directory for a
+new day.  It copies the files from the `template` directory into a new
+directory with the name `day-NN`.
+
+Run it with the `-h` option for further help:
+
+```bash
+$ bin/new-day.js -h
+```
+
 # Author
 
 Andy Wardley, December 2024
