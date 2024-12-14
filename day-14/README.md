@@ -1,6 +1,6 @@
 # Part 1
 
-Piece of cake.
+Piece of cake.  See [part1.js](part1.js).
 
 # Part 2 Attempt #1 - Image Files
 
