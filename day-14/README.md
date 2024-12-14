@@ -53,7 +53,7 @@ directory which allowed me to check that it was correct.
 A few hours after the first attempt I decided to have another crack at this
 and try to solve it "properly".
 
-This is implemented in `part2-sd.js`.  It computes the standard deviation
+This is implemented in [part2-sd.js](part2-sd.js).  It computes the standard deviation
 of the robot population at each step and makes the assumption that the step
 with the lowest SD is the one with a well-defined pattern.
 
