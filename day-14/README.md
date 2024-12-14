@@ -2,7 +2,7 @@
 
 Piece of cake.
 
-# Part 2 Image Files
+# Part 2 Attempt #1 - Image Files
 
 This required an ugly, but pragmatic approach.  It would have been really
 nice to employ an image detection algorithm of some kind, but that's beyond
@@ -47,3 +47,14 @@ Then I set `CREATE_TILES` to false, set `INSPECT_STEP` to 8270 and ran
 directory which allowed me to check that it was correct.
 
 ![Iteration 8270](images/solution-8270.png)
+
+# Part 2 Attempt #2 - Standard Deviation
+
+A few hours after the first attempt I decided to have another crack at this
+and try to solve it "properly".
+
+This is implemented in `part2-sd.js`.  It computes the standard deviation
+of the robot population at each step and makes the assumption that the step
+with the lowest SD is the one with a well-defined pattern.
+
+Lo and behold, it produces the same result.
