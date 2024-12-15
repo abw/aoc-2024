@@ -30,8 +30,9 @@ $ cd day-01
 $ ./part1.js
 ```
 
-By default the code will process the `file/input.txt` file in the same
-directory, hopefully giving the correct answer for the puzzle.
+By default the code will process the `files/input.txt` file in the same
+directory, hopefully giving the correct answer for the puzzle.  You will
+need to download the input.txt file and save it in the `files` directory.
 
 The `-e` (or `--example`) option will run the code using the
 `files/example.txt` input.
