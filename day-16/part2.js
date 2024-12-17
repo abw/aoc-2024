@@ -1,17 +1,20 @@
 #!/usr/bin/env node
-import { fail } from '@abw/badger-utils'
-import { arrowDirection, turnClockwise, turnAntiClockwise } from '../lib/direction.js'
-import { findCell, showMap } from '../lib/map.js'
 import { run } from '../lib/run.js'
+import { fail } from '@abw/badger-utils'
 import { parseInput } from './lib.js'
+import { findCell, showMap } from '../lib/map.js'
+import { arrowDirection, turnClockwise, turnAntiClockwise } from '../lib/direction.js'
 
 const isWall = {
   '#': true,
 }
 
+// TODO: this is just a copy pasta of part 1.  Need to add the code to store
+// the best paths and determine how many cells are on at least one best path.
+
 await run(
-  // { day: '16', part: 1, lines: true, exampleFile: 'example2.txt' },
-  { day: '16', part: 1, lines: true },
+  // { day: '16', part: 2, lines: true, exampleFile: 'example2.txt' },
+  { day: '16', part: 2, lines: true },
   ({ lines, debugging, debugData }) => {
     const map = parseInput(lines)
     const reindeer = findCell(map, 'S') || fail('no start')
